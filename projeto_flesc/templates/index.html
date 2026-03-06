@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Sistema FLESC</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="card">
+    <h1>Cadastro FLESC</h1>
+    <form action="/cadastrar" method="POST" enctype="multipart/form-data">
+    <label>Código</label>
+    <input type="text" name="codigo" placeholder="Digite o código">
+    <label>Nome</label>
+    <input type="text" name="nome" placeholder="Digite o nome">
+    <label>Foto</label>
+    <input type="file" name="foto">
+    <button type="submit">Cadastrar</button>
+</form>
+    <hr>
+    <h2>Buscar aluno</h2>
+    <form action="/buscar" method="POST">
+    <input type="text" name="codigo_busca" placeholder="Digite o código">
+    <button type="submit">Buscar</button>
+</form>
+
+{% if msg %}
+<p class="msg">{{msg}}</p>
+{% endif %}
+
+{% if erro %}
+<p class="erro">{{erro}}</p>
+{% endif %}
+
+{% if aluno %}
+
+<div class="resultado">
+    <h3>Aluno encontrado</h3>
+        <p><b>Código:</b> {{aluno.codigo}}</p>
+        <p><b>Nome:</b> {{aluno.nome}}</p>
+        <img src="{{ url_for('static', filename='uploads/' + aluno.caminho_imagem) }}">
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
